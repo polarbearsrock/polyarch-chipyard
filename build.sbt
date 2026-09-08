@@ -4,6 +4,12 @@ import Tests._
 // implicit one
 lazy val chipyardRoot = Project("chipyardRoot", file("."))
 
+// Sonatype's OSS snapshot repository has been retired, so the test-scoped
+// "treadle 1.3-SNAPSHOT" dependency declared by chisel3's own build can no
+// longer be resolved. Chipyard builds treadle from tools/treadle, so just force
+// a released version for that (unused) test-scope artifact.
+Global / dependencyOverrides += "edu.berkeley.cs" %% "treadle" % "1.3.4"
+
 lazy val commonSettings = Seq(
   organization := "edu.berkeley.cs",
   version := "1.3",
